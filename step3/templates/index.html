@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Password Manager</title>
+    </head>
+
+    <body>
+        <h1>Password Manager</h1>
+
+        <h2>Register</h2>
+        <div style="display: flex; flex-direction: column; align-items: flex-start;">
+            <label for="site-input-r">Website:</label>
+            <input type="text" id="site-input-r" name="site-input-r">
+            <label for="username-input-r">Username:</label>
+            <input type="text" id="username-input-r" name="username-input-r">
+            <label for="password-input-r">Password:</label>
+            <input type="text" id="password-input-r" name="password-input-r">
+            <button type="button" id="save-button" name="save-button">Save</button>
+        </div>
+
+        <h2>Autofill</h2>
+        <div style="display: flex; flex-direction: column; align-items: flex-start;">
+            <label for="site-input-a">Website:</label>
+            <input type="text" id="site-input-a" name="site-input-a">
+            <label for="username-input-a">Username:</label>
+            <input type="text" id="username-input-a" name="username-input-a">
+            <button type="button" id="autofill-button" name="autofill-button">Autofill</button>
+            <label for="password-input-a">Password:</label>
+            <input type="text" id="password-display-a" name="password-display-a" readonly>
+        </div>
+    </body>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</html>
