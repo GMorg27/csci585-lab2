@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, render_template, request
 
 from cloud import get_shares, save_shares, NUM_SERVERS
-from shamir import join_shares, split_shares
+from shamir import P_BYTE_LENGTH, join_shares, split_shares
 
 
 # Config
@@ -24,7 +24,11 @@ def save():
 
     # Encode password as number, split into shares, and save
     password_bytes = password.encode("utf-8")
+    if len(password_bytes) > P_BYTE_LENGTH:
+        return jsonify({"error": "Password too long"}), 400
     secret = int.from_bytes(password_bytes, byteorder="big")
+
+    print(secret)
     shares = split_shares(secret, THRESHOLD, NUM_SERVERS)
     if not save_shares(website, username, shares):
         return jsonify({"error": "Could not save shares to cloud"}), 500
@@ -43,8 +47,9 @@ def autofill():
     if len(shares) < THRESHOLD:
         return jsonify({"error": "Number of shares available is below threshold"}), 500
     secret = join_shares(shares[:THRESHOLD])
-    password_bytes = int.to_bytes(secret, length=8, byteorder="big")
-    password = password_bytes.decode("utf-8")
+    print(secret)
+    password_bytes = int.to_bytes(secret, length=P_BYTE_LENGTH, byteorder="big")
+    password = password_bytes.lstrip(b"\x00").decode("utf-8")
     return {"password": password}
 
 if __name__ == "__main__":

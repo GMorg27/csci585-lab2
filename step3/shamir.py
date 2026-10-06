@@ -2,8 +2,9 @@ import galois
 import numpy as np
 import secrets
 
-P = 2**61 - 1 # Modulo prime number
+P = 2**127 - 1 # Modulo prime number
 GF_P = galois.GF(P) # Finite field
+P_BYTE_LENGTH = P.bit_length() // 8
 
 def split_shares(d: int, k: int, n: int) -> list[tuple[int, int]]:
     poly = _gen_polynomial(d, k)
