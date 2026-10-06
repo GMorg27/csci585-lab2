@@ -3,7 +3,7 @@ async function onSplitClick() {
     const threshold = parseInt(document.getElementById("threshold-input").value);
     const total = parseInt(document.getElementById("total-input").value);
     if (!validateSplitInput(secret, threshold, total)) {
-        alert("Values of (k) and (n) must be positive, with (k) not exceeding (n)")
+        alert("Values of (k) and (n) must be positive, with (k) not exceeding (n)");
         return;
     }
 
@@ -48,7 +48,7 @@ async function onJoinClick() {
     const sharesText = document.getElementById("shares-input").value;
     const shares = parseShares(sharesText);
     if (shares.length === 0) {
-        alert("Enter one share per line in format (k, n)")
+        alert("Enter one share per line in format (k, n)");
         return;
     }
 
@@ -81,7 +81,7 @@ function parseShares(text) {
     const lines = text.split(/\r?\n/).map(line => line.trim()).filter(line => line !== "");
     for (const line of lines) {
         if (!line.match(/\(-?\d+, -?\d+\)/)) {
-            return []
+            return [];
         }
     }
     return lines;
