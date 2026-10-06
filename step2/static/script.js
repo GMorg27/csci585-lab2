@@ -8,7 +8,12 @@ async function onSplitClick() {
     }
 
     try {
-        const response = await fetch("http://localhost:5000/split", {
+        const sharesDisplay = document.getElementById("shares-display");
+        sharesDisplay.style.display = "revert";
+        const sharesList = document.getElementById("shares-list");
+        sharesList.replaceChildren();
+
+        const response = await fetch("/split", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -19,12 +24,16 @@ async function onSplitClick() {
                 n: total
             })
         });
-
         if (!response.ok) {
             throw new Error(`HTTP error; status: ${response.status}`);
         }
+
         const result = await response.json();
-        console.log(result); // TODO
+        for (const share of result) {
+            const li = document.createElement("li");
+            li.textContent = `(${share[0]}, ${share[1]})`;
+            sharesList.appendChild(li);
+        }
     }
     catch (error) {
         console.error("Split error:", error);
@@ -44,20 +53,24 @@ async function onJoinClick() {
     }
 
     try {
-        const response = await fetch("http://localhost:5000/join", {
+        const secretDisplay = document.getElementById("secret-display");
+        secretDisplay.style.display = "revert";
+        secretDisplay.textContent = "Recovered Secret: ??";
+
+        const response = await fetch("/join", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(shares)
         });
-
         if (!response.ok) {
             throw new Error(`HTTP error; status: ${response.status}`);
         }
+
         const result = await response.json();
         const secret = parseInt(result.secret);
-        console.log(secret); // TODO
+        secretDisplay.textContent = `Recovered Secret: ${secret}`;
     }
     catch (error) {
         console.error("Join error:", error);

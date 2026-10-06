@@ -25,6 +25,10 @@
             </label>
             <button type="button" id="split-button" name="split-button">Split</button>
         </div>
+        <div id="shares-display" name="shares-display" style="display: none;">
+            <h3>Generated Shares:</h3>
+            <ul id="shares-list" name="shares-list"></ul>
+        </div>
 
         <h2>Join Shares</h2>
         <div style="display: flex; flex-direction: column; align-items: flex-start;">
@@ -32,6 +36,7 @@
             <textarea type="text" id="shares-input" name="shares-input" rows="5" cols="40"></textarea>
             <button type="button" id="join-button" name="join-button">Join</button>
         </div>
+        <h3 id="secret-display" name="secret-display" style="display: none;">Recovered Secret: ??</h3>
     </body>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>

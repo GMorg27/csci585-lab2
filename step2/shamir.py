@@ -3,7 +3,7 @@ import numpy as np
 import secrets
 
 
-P = 2**61 - 1 # Modulo prime number
+P = 2**31 - 1 # Modulo prime number
 GF_P = galois.GF(P) # Finite field
 
 def split_shares(d: int, k: int, n: int) -> list[tuple[int, int]]:
