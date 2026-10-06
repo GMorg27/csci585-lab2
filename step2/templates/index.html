@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Shamir's Secret Sharing Web App</title>
+    </head>
+
+    <body>
+        <h1>Shamir's Secret Sharing Web App</h1>
+
+        <h2>Split Secret</h2>
+        <div style="display: flex; flex-direction: column; align-items: flex-start;">
+            <label>
+                Secret (integer):
+                <input type="number" id="secret-input" name="secret-input">
+            </label>
+            <label>
+                Threshold (k):
+                <input type="number" id="threshold-input" name="threshold-input">
+            </label>
+            <label>
+                Total Shares (n):
+                <input type="number" id="total-input" name="total-input">
+            </label>
+            <button type="button" id="split-button" name="split-button">Split</button>
+        </div>
+
+        <h2>Join Shares</h2>
+        <div style="display: flex; flex-direction: column; align-items: flex-start;">
+            <label for="shares-input">Enter at least k shares (one per line, format: (x, y)):</label>
+            <textarea type="text" id="shares-input" name="shares-input" rows="5" cols="40"></textarea>
+            <button type="button" id="join-button" name="join-button">Join</button>
+        </div>
+    </body>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</html>
